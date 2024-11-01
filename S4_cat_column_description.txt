@@ -1,0 +1,10 @@
+#Description of columns for S4_new_catalogue_13_07_24.csv
+
+source_id - Gaia DR3 source id, taken either from the Yao or Andrae catalogues
+RA - Right ascension in degrees from 0 < RA < 360
+DEC - Declination in degrees from -90 < Dec < 90
+BP - Gaia BP band magnitude, available for all stars from the Yao catalogue
+p0 - probability of star having -2.5 < [Fe/H] < -2 from XGBOOST, taken from Yao
+mh_xgboost - [m/h] value from XGBOOST, taken from Andrae catalogue
+teff_xgboost - teff value from XGBOOST, taken from Andrae catalogue
+logg_xgboost - logg value from XGBOOST, taken from Andrae catalogue

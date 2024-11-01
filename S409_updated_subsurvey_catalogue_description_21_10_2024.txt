@@ -1,0 +1,163 @@
+S0409 - 4MOST disc and bulge metal-poor sub-survey selection
+
+1 Sub-survey overview
+
+Sub-survey title: 4MIDABLE-HR-METALPOOR S0409
+Contact person: Kris Youakim
+Contact email address: kristopher.youakim@astro.su.se
+Brief science goal description: Specific targeting of low metallicity stars in 
+the disc and bulge to search for extremely metal-poor stars, characterize the
+metal-poor tail of the MDF, identify and characterize low-metallicity 
+substructures, and obtain high quality abundance measurements for a larger
+sample of metal-poor stars in the MW.
+
+1.1 Source of target catalogue selection
+
+The metal-poor stars catalogue for the high-resolution disc and bulge survey 
+was made up using 3 source catalogues: 
+
+a. The Gaia XP catalogue from Rene Andrae, Hans-Walter Rix, and Vedant Chandra 
+(2023). These metallicities are derived using the XGBOOST algorithm. For a 
+detailed description of this algorithm and the method used to derive 
+metallicities see Rix et al. (2022ApJ...941...45R) - which provides a similar 
+catalogue for targets towards the Galactic centre - and Andrae et al. 2023
+(2023ApJS..267....8A). In Andrae et al. 2023, they provide a catalogue of over 
+17 million bright (G < 16) red giants whose [M/H] values are vetted to be 
+precise and pure, and this is the table that we use for the selection. It can
+be downloaded here (table_2_catwise.fits.gz):
+
+https://zenodo.org/records/7945154
+
+b. The Gaia XP catalogue of 200,000 metal-poor stars from Yao et al. 2024 
+(2024MNRAS.52710937Y). This work also uses the XGBOOST algorithm to derive
+metallicities but they specifically tune the algorithm to search for metal-poor
+stars. They provide 3 different catalogues in the paper, 
+one for Turn-off stars (TO) - 11 000 stars, one for Giant stars with high 
+completeness (GC) - 111 000 stars, and one for Giant stars with high purity 
+(GP) - 44 000. In Yao et al. 2024, they also apply the algorithm to fainter 
+samples, but for our selection we only used the brighter catalogues with 
+G < 16. These can be downloaded here:
+
+https://zenodo.org/records/8360958
+
+c. The Pristine survey synthetic CaHK DR1 Gaia XP catalogue from 
+Martin et al. 2023 (2023arXiv230801344M). The Pristine survey uses narrow-band
+photometry around the CaHK spectral region (~390-400 nm) to derive photometric
+metallicities to Milky Way stars. See Starkenburg et al. 2017 
+(2017MNRAS.471.2587S) for more details. The Martin et al. 2023 catalogue 
+derives synthetic magnitudes in this filter from Gaia XP spectra, and assigns 
+metallicities based on the Pristine Survey calibration, which is calibrated to 
+perform well in the metal-poor regime ([Fe/H] < -1). They then provide [Fe/H] 
+estimates for ~50 million Gaia stars. The catalogue can be downloaded from 
+(this link may change after acceptance of the paper):
+
+https://seafile.unistra.fr/d/ee0c0f05719d4368bcbb/ 
+
+1.2 Target selection overview:
+
+The targets were selected by taking by all stars from the Yao et al. 2024 GP
+catalogue with the following cuts:
+
+(BP < 16) & (DEC < 5) 
+(brightness limit and Declination limit for 4MOST) 
+- 32 000 stars
+
+Then, we take all stars from the Andrae et al. 2023 giants catalogue 
+with [M/H] < -2 and not in the above selected Yao GP sample. 
+The cuts made were:
+
+(mh_xgboost < -2) & (dec < 5) 
+- 17 500 stars (~5 500 which don't overlap with the Yao et al. GP sample)
+
+Then, we take all stars in the Yao et al. 2024 TO catalogue with the following 
+cuts:
+(BP < 16) & (DEC < 5)
+- 4 250 stars
+
+We then take all stars from the Yao et al. 2024 GC sample with a high 
+probability from XGBOOST of being metal-poor (p0 > 0.9), and then keep only the 
+ones that are also labelled as metal-poor in the Pristine sample, by 
+cross-matching the two catalogues. This ensures that the Yao et al. 2024 GC 
+selected stars will still have a high purity, and this step was done just to 
+increase the number of stars in the total sample to ~50 000, which was the 
+target number for the metal-poor sub-survey. We implemented the following cuts:
+Yao GC sample:
+(BP < 16) & (DEC < 5) & (p0 > 0.9)
+Pristine catalogue:
+(G_0 < 16) & (Dec < 5) & (FeH_CaHKsyn < -2)
+
+And cross-matched the two catalogues, which yielded 12 600 stars.
+
+The following steps summarise the selection of the full catalogue:
+(brightness cuts of Gaia_G < 16 and dec < 5 apply to all catalogues)
+
+1. all stars from Yao GP,                                                     
+2. stars from Yao GC with P0 > 0.9 & in Pristine & not in Andrae.         
+3. all stars in Yao T                                                         
+4. all stars from Andrae with [M/H] < -2 and not in Yao GP
+
+We then removed all duplicate stars and ended up with the sample of 
+52 614 stars.
+
+1.3 Target coordinates, proper motion, and parallaxes
+
+The target coordinates, parallaxes and proper motions were taken from the 
+latest Gaia DR3 catalogue.
+
+1.4 Target photometry
+
+Photometry was taken from the Gaia DR3 catalogue. These are observed 
+magnigudes. 
+
+1.5 Redshifts
+
+N/A
+
+1.6 Reddening
+
+Targets are selected to have an approximately dereddened magnitude. The
+quality cuts from the respectice catalogues should remove most stars that are
+strongly affected by reddening.
+
+1.7 Spectral templates
+
+---
+
+1.8 Known connections to other sub-surveys
+
+There is a connection to the S2 Milky Waay Halo high-resolution survey, namely 
+S201 (bright: 12.0 <G<=15.0) and S202 (faint: 15.0 <G<=16.0) sub-surveys which 
+will also likely observe metal-poor stars in the same brightness regime at 
+|b| > 20. There is also a connection to the S3 Milky Way Disk/Bulge low-res
+survey, and S1 Milky Way halo low-res surveys which also are following up 
+metal-poor stars. The following overlap exists in the input catalogues between 
+these surveys, as of the observational simulations from IWG2 in May, 2024:
+
+S0409 x S0306 - 26 796 (51%)
+S0409 x S0201 - 15 060 (29%)
+S0409 x S0202 - 9 658 (18%)
+S0409 x S0101 - 4 314 (8%)
+S0409 x S0301 - 3 567 (7%)
+
+These overlaps are known to the above surveys and have been discussed by their 
+members. The overlaps were deemed to be acceptable, both due to added 
+scientific value of multiply observed stars in HR and LR and also due to the 
+fact that we are likely doing a full follow-up of the best metal-poor 
+candidates at these brighter magnitudes and thus some overlap between surveys 
+is unavoidable. All other catalogue overlaps are minor (< 5%).
+
+1.9 Any additional information
+
+ADS links to relevant papers:
+
+Andrae, Walter-Rix, Chandra 2023
+https://ui.adsabs.harvard.edu/abs/2023ApJS..267....8A/abstract
+
+Yao et al. 2024
+https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710937Y/abstract
+
+Martin et al. 2023
+https://ui.adsabs.harvard.edu/abs/2023arXiv230801344M/abstract
+
+Starkenburg et al. 2017
+https://ui.adsabs.harvard.edu/abs/2017MNRAS.471.2587S/abstract
